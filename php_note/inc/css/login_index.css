@@ -1,0 +1,180 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+html{
+	min-width: 1200px;
+}
+/*----------1711140136-logo----------*/
+#logo{
+	width: 100%;
+	height: 100px;
+	/*border: 1px solid pink;*/
+}
+#logo .content{
+	margin-left: 140px;
+	margin-top: 20px;
+}
+#logo .content img{
+	float: left;
+	width: 190px;
+}
+#logo .content span{
+	float: left;
+	color: #ffffff;
+	font-size: 25px;
+	/*border: 1px solid red;*/
+	margin-left: 10px;
+	margin-top: 27px;
+	font-style: italic;
+}
+/*----------------------------------*/
+
+/*--------1711140136-个人信息--------*/
+#personal_details{
+	padding-top: 1px;
+	width: 85%;
+	height: 50px;
+	background-color: #212529;
+	margin: 0 auto;
+}
+#personal_details ul>li{
+	float: left;
+	/*border: 1px solid pink;*/
+
+}
+#personal_details ul>span{
+	float: left;
+	/*border: 1px solid pink;*/
+	margin-left: 20px;
+	color: #9370db;
+}
+#personal_details ul>li{
+	color: #FCFCFC;
+	font-style: italic;
+}
+#personal_details .avatar_link{
+	display: block;
+	float: left;
+	width: 40px;
+	height: 40px;
+	margin-top: -10px;
+}
+#personal_details .avatar{
+	width: 100%;
+	height: 100%;
+	border-radius: 20px;
+}
+/*--------------------------------*/
+
+/*--------1711140136-导航栏--------*/
+#top-nav{
+	/*float: left;*/
+	margin: 0 auto;
+	width: 85%;
+	height: 50px;
+	/*border: 1px solid red;*/
+	background-color: #563d7c;
+	margin-top: -16px;
+	position: relative;
+}
+
+#top-nav .content ul>li:last-child{
+	float: right;
+}
+#top-nav .content ul>li{
+	text-align: center;
+	display: inline-block;
+	float: left;
+}
+#top-nav .content ul>li>a{
+	padding-top: 14px;
+	display: block;
+	width: 130px;
+	height: 50px;
+	/*border: 1px solid red;*/
+	color: #FCFCFC;
+	text-decoration: none;
+	background-color: #563d7c;
+}
+#top-nav .content ul>li>a:hover{
+	background-color: #ffffff;
+	color: #9370db;
+}
+#top-nav .select_dep{
+	margin-left: 90px;
+	float: left;
+	width: 400px;
+	height: 50px;
+	/*border: 1px solid red;*/
+}
+#top-nav .select_dep select{
+	width: 150px;
+	float: left;
+	height: 50px;
+}
+#top-nav .select_dep button{
+	height: 50px;
+	float: left;
+}
+/*----------------------------------*/
+
+/*----1711140136-某个班级学生列表----*/
+#stu_table{
+	height: 750px;
+	width: 85%;
+	margin: 0 auto;
+	background-color:#e4e4e4;
+}
+#stu_table .content>p{
+	padding-top: 20px;
+	margin-bottom: 20px;
+	/*color: #FFFFFF;*/
+	margin-left: 30px;
+}
+/*---------------------------------*/
+
+
+
+/*--------1711140136-版权说明-------*/
+#footer{
+	width: 85%;
+	height: 50px;
+	/*border: 1px solid pink;*/
+	background-color: #666666;
+	text-align: center;
+	padding-top: 10px;
+	margin: 0 auto;
+}
+#footer span{
+	font-size: 13px;
+	color: #323539;
+	margin: 0 auto;
+}
+/*----------------------------------*/
+
+/*上传头像*/
+.uploadAvatar{
+	display: none;
+	position: absolute;
+	width: 400px;
+	right: 242px;
+	top: 51px;
+	height: 140px;
+	padding: 30px 20px;
+	background-color: #ffffff;
+	border-radius: 10px;
+}
+/*.uploadAvatar > span{
+	display: block;
+	width: 15px;
+	width: 15px;
+	float: right;	
+}*/
+.uploadAvatar{
+}
+.uploadAvatar button{
+	margin-top: 10px;
+	width: 100%;
+}
+

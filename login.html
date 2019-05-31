@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>login</title>
+	<link rel="stylesheet" href="php_note/inc/css/reset.css">
+	<link rel="stylesheet" href="php_note/inc/css/login.css">
+	<script src="php_note/inc/js/jQuery/jquery-3.3.1.js"></script>
+	<script src="php_note/inc/js/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+	<script src="php_note/inc/js/login.js"></script>
+	<script src="php_note/inc/vendors/bootstrap4/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="php_note/inc/vendors/bootstrap4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="php_note/inc/vendors/animate/animate.min.css">
+</head>
+<body style="background-color: #212529";>
+	<div id="login" class="<?php echo isset($error_message)?'animated swing ' : '' ?>">
+		<!-- 1711140136-头像 -->
+		<div class="avatar">
+			<img src="php_note/inc/upload/default.jpg" alt="">
+		</div>
+		<!-- 1711140136-登录字体 -->
+		<span><h3>登录</h3></span>
+		<!-- 1711140136-表单 -->
+		<form class="login_input form-group" action='school/login.php' method="post">
+			<input type="text" class="form-control account" name="account" placeholder="教工号/学号">
+			<input type="password" class="form-control" name="password" placeholder="密码">
+			<div class="TeOrStu">
+				<label>
+					<input type="radio" name="role" value="teacher">老师
+				</label>
+				<label>
+					<input type="radio" name="role" value="student">学生
+				</label>
+			</div>
+            <!-- 1711140136-验证码 -->
+            <div id="auth_code">
+                <input type="text" class="form-control account" name="auth_code" autocomplete="off">
+                <canvas width="120" height="40"></canvas>
+            </div>
+            <button class="btn btn-primary">登录</button>
+            <!-- 1711140136-错误提示框 -->
+            <div class='alert alert-danger' role='alert'></div>
+        </form>
+	</div>
+</body>
+</html>
