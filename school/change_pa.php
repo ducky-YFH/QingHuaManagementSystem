@@ -1,6 +1,6 @@
 <?php
 // 1711140136-引入数据库查询文件
-require_once "connUpdate.php";
+require_once "../php_note/inc/conn/connUpdate.php";
 // 1711140136-引入session文件
 require_once "API/LoginSession.php";
 

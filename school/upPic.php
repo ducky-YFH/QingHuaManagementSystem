@@ -1,7 +1,7 @@
 <?php 
 require_once "API/LoginSession.php";
 /* 1711140136-引入封装好的功能函数*/
-require_once "connUpdate.php";
+require_once "../php_note/inc/conn/connUpdate.php";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 	$avatarFile = $_FILES["avatarFile"];
 	$avatarType = $avatarFile["type"];

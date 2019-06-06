@@ -2,7 +2,8 @@
 	// 引入session
 	include "./API/LoginSession.php";
 	//1711140136导入数据库查询api
-	require_once "connSelect.php";
+	require_once "../php_note/inc/conn/connSelect.php";
+	require_once "../function.php";
 	// ------------------------171140136-学年、学期、院系查询------------------------
 			if(isset($_GET["learn_year"]) && isset($_GET["learn_term"]) && isset($_GET["dep"])){
 				$search_res = searchYearTermDep();

@@ -1,6 +1,6 @@
 <?php 
 include "./API/LoginSession.php";
-require_once "connSelect.php";
+require_once "../php_note/inc/conn/connSelect.php";
 // 1711140136-查询学生信息
 $query = mysqli_query($connect,"select * from yefh_stu;");
 

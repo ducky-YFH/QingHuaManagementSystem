@@ -1,6 +1,6 @@
 <?php
 //  1711140136-引入连接数据库脚本
-require_once "connSelect.php";
+require_once "../php_note/inc/conn/connSelect.php";
 ?>
 
 

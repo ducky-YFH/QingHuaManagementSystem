@@ -1,4 +1,5 @@
 <?php 
+	require_once "../function.php";
 	include "./API/LoginSession.php";
  ?>
 <!DOCTYPE html>
@@ -6,11 +7,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title>清华大学教务管理系统首页</title>
-	<link rel="stylesheet" href="/php_note/inc/css/reset.css">
-	<link rel="stylesheet" href="/php_note/inc/css/stu_score_search.css">
-	<script src="/php_note/inc/js/jQuery/jquery-3.3.1.min.js"></script>
-	<link rel="stylesheet" href="/php_note/inc/vendors/bootstrap4/css/bootstrap.min.css">
-	<link rel="stylesheet" href="/php_note/inc/vendors/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../php_note/inc/css/reset.css">
+	<link rel="stylesheet" href="../php_note/inc/css/stu_score_search.css">
+	<script src="../php_note/inc/js/jQuery/jquery-3.3.1.min.js"></script>
+	<link rel="stylesheet" href="../php_note/inc/vendors/bootstrap4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../php_note/inc/vendors/font-awesome/css/font-awesome.min.css">
+	<script src="../php_note/inc/js/stu_score_search.js"></script>
 </head>
 <body style="background-color: #212529;">
 	<!-- 1711140136-logo -->
@@ -27,7 +29,9 @@
 		<div class="content">
 			<ul>
 				<!-- 1711140136-显示学号或工号 -->
-				<span><i class="fa fa-user-circle-o"></i>你好！</span><li><?php echo $_SESSION["name"] ?></li>
+				<span class="span_avatar">
+					<a class="avatar_link" href="<?php echo $_SESSION["avatar"]; ?>"><img class="avatar" src="<?php echo $_SESSION["avatar"]; ?>" alt=""></a>你好！
+				</span><li><?php echo $_SESSION["name"] ?></li>
 				<span><?php echo $_SESSION["role"] === "teacher" ? "工号：" : "学号："?></span><li><?php echo $_SESSION["account"] ?></li>
 				<span>院系：</span><li>计算机学院</li>
 				<span>班级：</span><li>17计算机应用技术3-3班</li>
@@ -54,50 +58,71 @@
 			<div class="box_search">
 				<div class="search">
 					<form action="">
-							<select class="form-control" name="learn_year" id="learn_year">
+							<select class="form-control" name="learn_year">
 								<option value="" disabled selected style='display:none;'>学年</option>
-								<option value="all">默认-学年</option>
-								<option value="">2016</option>
-								<option value="">2017</option>
-								<option value="">2018</option>
+								<?php
+									date_default_timezone_set('prc');
+									$time = date('y',time()); //19
+									$time = '20' . $time; //2019
+									settype($time, 'int');
+									$time_interval = $time - 2003;
+									$time_interval++; //让时间加到到2020年;
+									for ($i=0; $i < $time_interval; $i++) {
+										$start_time = 2003 + $i;
+										$end_time = $start_time + 1;
+										$time_res = $start_time . "-" . $end_time;
+								?>
+									<option value='<?php echo $start_time . "-" . $end_time; ?>'>
+										<?php echo $time_res; ?>
+									</option>
+								<?php
+									}							 
+								?>
 							</select>
-							<select class="form-control" name="term" id="learn_year">
+							<select class="form-control" name="learn_term">
 								<option value="" disabled selected style='display:none;'>学期</option>
-								<option value="all">默认-学期</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
+								<option value="1" <?php echo isset($_GET['learn_term']) && $_GET["learn_term"] === '1' ? 'selected' : "" ?>>1</option>
+								<option value="2" <?php echo isset($_GET['learn_term']) && $_GET["learn_term"] === '2' ? 'selected' : "" ?>>2</option>
 							</select>
-							<select class="form-control" name="term" id="learn_year">
+							<select class="form-control" name="dep">
 								<option value="" disabled selected style='display:none;'>院系</option>
-								<option value="all">默认-院系</option>
-								<option value="">计算机学院</option>
-								<option value="">软件学院</option>
-								<option value="">数字媒体学院</option>
+								<?php 
+									$sql = "select * from yefh_dep;";
+									$res = mysql_search($sql);
+								?>
+								<?php foreach ($res as $item): ?>
+									<option value="<?php echo $item["dep_name"]; ?>"><?php echo $item["dep_name"]; ?></option>
+								<?php endforeach ?>
 							</select>
-							<select class="form-control" name="term" id="learn_year">
+							<select class="form-control" name="stuClass">
 								<option value="" disabled selected style='display:none;'>班级</option>
-								<option value="all">默认-班级</option>
-								<option value="">16计算机应用3-1班</option>
-								<option value="">16计算机应用3-3班</option>
-								<option value="">17计算机应用3-2班</option>
+								<?php
+									$sql = "SELECT stu_class FROM `yefh_class`";
+									$res = mysql_search($sql);
+								?>
+								<?php foreach ($res as $item): ?>
+									<option value="<?php echo $item["stu_class"]; ?>"><?php echo $item["stu_class"]; ?></option>
+								<?php endforeach ?>
 							</select>
-						<button class="btn">查询</button>
-					</form>	
+						<button type="button" class="btn LTD_btn">查询</button>
+					</form>
 				</div>		
 				<div class="search">
 					<form action="">
-							<select class="form-control" name="learn_year" id="learn_year">
+							<select class="form-control" name="course">
 								<option value="" disabled selected style='display:none;'>课程</option>
-								<option value="all">默认-课程</option>
-								<option value="">web项目应用</option>
-								<option value="">linux运维</option>
-								<option value="">python编程技术</option>
+								<?php 
+									$sql = 'select c_name from yefh_course';
+									$res = mysql_search($sql);
+								?>
+								<?php foreach ($res as $item): ?>
+									<option value="<?php echo $item["c_name"]; ?>"><?php echo $item["c_name"]; ?></option>
+								<?php endforeach ?>
 							</select>
-						<button class="btn">查询</button>
+						<button type="button" class="btn courseBtn">查询</button>
 					</form>
 					<form action="">
-							<select class="form-control" name="learn_year" id="learn_year">
+							<select class="form-control" name="">
 								<option value="" disabled selected style='display:none;'>课程类型</option>
 								<option value="all">默认-课程类型</option>
 								<option value="">支撑课</option>
@@ -120,63 +145,8 @@
 	</div>
 	<!-- 1711140136-教学任务查询结果 -->
 	<div id="search_result">
-		<div class="content">
-			<table class="table table-hover">
-				<thead>
-				  <tr>
-				    <th scope="col">班级名称</th>
-				    <th scope="col">任课教师</th>
-				    <th scope="col">课程名称</th>
-				    <th scope="col">课程类型</th>
-				    <th scope="col">周课时</th>
-				    <th scope="col">起止周</th>
-				    <th scope="col">总课时</th>
-				    <th scope="col">考核方式</th>
-				  </tr>
-				</thead>
-				<tbody>
-				  <tr>
-				    <th scope="row">15计算机应用技术3-1</th>
-				    <td>刘楠</td>
-				    <td>企业级网站开发与部署</td>
-				    <td>支撑课</td>
-				    <td>4.0-0.0</td>
-				    <td>01-14</td>
-				    <td>56</td>
-				    <td>过程</td>
-				  </tr>
-					<tr>
-				    <th scope="row">15计算机应用技术3-1</th>
-				    <td>刘楠</td>
-				    <td>企业级网站开发与部署</td>
-				    <td>支撑课</td>
-				    <td>4.0-0.0</td>
-				    <td>01-14</td>
-				    <td>56</td>
-				    <td>过程</td>
-				  </tr>
-				  <tr>
-				    <th scope="row">15计算机应用技术3-1</th>
-				    <td>刘楠</td>
-				    <td>企业级网站开发与部署</td>
-				    <td>支撑课</td>
-				    <td>4.0-0.0</td>
-				    <td>01-14</td>
-				    <td>56</td>
-				    <td>过程</td>
-				  </tr>
-				  <tr>
-				    <th scope="row">15计算机应用技术3-1</th>
-				    <td>刘楠</td>
-				    <td>企业级网站开发与部署</td>
-				    <td>支撑课</td>
-				    <td>4.0-0.0</td>
-				    <td>01-14</td>
-				    <td>56</td>
-				    <td>过程</td>
-				  </tr>
-				</tbody>
-			</table>
+		<div class="content" id="ContentArea">
+
 		</div>
 	</div>
 	<!-- 1711140136-版权说明 -->

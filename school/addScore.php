@@ -17,8 +17,9 @@
     $SheetOne = $spreadSheet->getSheet(0);
     //1711140136-统计excel有多少个学生
     $sum = $SheetOne->getHighestRow();
+    $task_id = $_GET["task_id"];
     //1711140136-先查询数据库是否为空如果为空就插入数据，否则就更新数据
-    $res = mysqli_query($connect,"select sc_id from yefh_score");
+    $res = mysqli_query($connect,"select stu_id from yefh_score");
     if(mysqli_fetch_assoc($res) === null){
         $sql = "insert into yefh_score
         (task_id,stu_id,sc_final,sc_overall) values ";
@@ -42,7 +43,7 @@
                 break;
             }
             //1711140136-拼接插入字符串
-            $sql .="(null,$userId,$UsuallyScore,$finalScore),";
+            $sql .="($task_id,$userId,$UsuallyScore,$finalScore),";
             unset($finalScore);
             unset($userId);
         }
@@ -50,9 +51,15 @@
         $sql = substr($sql, 0 , strlen($sql)-1);
         //1711140136-存数据
         mysqli_query($connect,$sql);
-        if(mysqli_affected_rows($connect) !== 0){
+        if(mysqli_affected_rows($connect) > 0 ){
             echo '插入数据成功';
         }
+        ?>
+            <script>
+                alert("插入数据成功！");
+                location = "te_score_in.php";
+            </script>
+        <?php
     }
 
     function updateData($SheetOne,$sum,$connect){

@@ -121,10 +121,11 @@ html{
 
 /*----1711140136-某个班级学生列表----*/
 #stu_table{
-	height: 750px;
+	/*height: 750px;*/
 	width: 85%;
 	margin: 0 auto;
 	background-color:#e4e4e4;
+	margin-bottom:-16px;
 }
 #stu_table .content>p{
 	padding-top: 20px;
@@ -151,7 +152,6 @@ html{
 	color: #323539;
 	margin: 0 auto;
 }
-/*----------------------------------*/
 
 /*上传头像*/
 .uploadAvatar{

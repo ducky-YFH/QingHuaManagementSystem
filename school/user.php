@@ -30,7 +30,9 @@ include "./API/LoginSession.php";
 		<div class="content">
 			<ul>
 				<!-- 1711140136-显示学号或工号 -->
-				<span><i class="fa fa-user-circle-o"></i>你好！</span><li><?php echo $_SESSION["name"] ?></li>
+				<span class="span_avatar">
+					<a class="avatar_link" href="<?php echo $_SESSION["avatar"]; ?>"><img class="avatar" src="<?php echo $_SESSION["avatar"]; ?>" alt=""></a>你好！
+				</span><li><?php echo $_SESSION["name"] ?></li>
 				<span><?php echo $_SESSION["role"] === "teacher" ? "工号：" : "学号："?></span><li><?php echo $_SESSION["account"] ?></li>
 				<span>院系：</span><li>计算机学院</li>
 				<span>班级：</span><li>17计算机应用技术3-3班</li>
